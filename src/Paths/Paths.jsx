@@ -8,6 +8,8 @@ import Applyjob from "../Pages/Applyjob";
 import MyJob from "../Pages/Myjob";
 import Blog from "../Pages/Blog";
 import Add from "../Pages/Add";
+import Login from "../Login/Login";
+import Register from "../Login/Register";
 
 
 
@@ -44,6 +46,14 @@ import Add from "../Pages/Add";
         {
             path:'/profile',
             element:<Profile></Profile>
+        },
+        {
+            path:"/login",
+            element: <Login></Login>
+        },
+        {path: "/register",
+        element:<Register></Register>
+
         }
         
       ]
