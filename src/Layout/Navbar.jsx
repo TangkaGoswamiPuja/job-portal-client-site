@@ -23,7 +23,10 @@ const Navbar = () => {
        {links}
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">daisyUI</a>
+    <div className="flex gap-2 items-center">
+    <img className='w-10' src="https://i.ibb.co/jycCYtc/job.png" alt="" />
+    <a className="text-2xl font-bold ">JOB HUNTER</a>
+    </div>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
