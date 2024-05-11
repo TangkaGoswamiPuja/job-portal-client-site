@@ -1,15 +1,31 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { BsEyeFill } from "react-icons/bs";
 import { BsEyeSlashFill } from "react-icons/bs";
+import { AuthContext } from '../Authfile/Auth';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
+
+    const { createrUser} = useContext(AuthContext)
+
     const [show,setShow] = useState(false)
       const {register,handleSubmit, formState:{errors}}= useForm();
         const onSubmit = data =>{  
             console.log(data);
             console.log(errors);
+
+
+            createrUser(data.email,data.password)
+            .then(result=> {
+                console.log(result.user)
+           toast("Registration successful !")
+        })
+        .catch(error=>{console.log(error)})
+
+            
         }
           
     return (
@@ -88,6 +104,8 @@ required:{value:true,
     </div>
   </div>
 </div>
+<ToastContainer />
+
         </div>
     );
 };

@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Authfile/Auth';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Login = () => {
+const {signIn} = useContext(AuthContext)
+
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onLogin = data => {
         console.log(data);
         console.log(errors);
+
+        signIn(data.email,data.password)
+        .then(result=>{
+            console.log(result.user)
+            toast("logged in successfully")
+        })
+        .catch(error=>{
+            console.log(error)
+        })
     }
     return (
         <div>
@@ -39,7 +54,9 @@ const Login = () => {
 
     </div>
   </div>
-</div>
+</div>     
+   <ToastContainer />
+
         </div>
     );
 };
