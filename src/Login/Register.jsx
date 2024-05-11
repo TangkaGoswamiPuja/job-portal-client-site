@@ -8,26 +8,27 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
-
+    const [regError,setRegError]= useState('')
+ const [show,setShow] = useState(false)
     const { createrUser} = useContext(AuthContext)
-
-    const [show,setShow] = useState(false)
-      const {register,handleSubmit, formState:{errors}}= useForm();
+      const {register,handleSubmit, formState:{errors},reset}= useForm();
         const onSubmit = data =>{  
             console.log(data);
             console.log(errors);
-
+            setRegError('')
 
             createrUser(data.email,data.password)
             .then(result=> {
                 console.log(result.user)
            toast("Registration successful !")
         })
-        .catch(error=>{console.log(error)})
-
+        .catch(error=>{console.error(error)
+            setRegError(error.message)
+        })
+        reset();  
             
         }
-          
+       
     return (
         <div>
            <div className="hero min-h-screen bg-base-200">
@@ -99,6 +100,9 @@ required:{value:true,
           <button className="btn btn-outline btn-primary">Register</button>
         </div>
       </form>
+      {
+        regError && <p className='p-5 text-red-600'>{regError}</p>
+    }
       <p className="text-center mb-5">Already have a account? <Link className='link text-purple-500' to="/login">plz login</Link></p>
 
     </div>

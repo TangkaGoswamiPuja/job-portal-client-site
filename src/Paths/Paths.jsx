@@ -10,6 +10,7 @@ import Blog from "../Pages/Blog";
 import Add from "../Pages/Add";
 import Login from "../Login/Login";
 import Register from "../Login/Register";
+import Private from "../Authfile/Private";
 
 
 
@@ -29,23 +30,23 @@ import Register from "../Login/Register";
         },
         {
             path:'/appliedjobs',
-            element:<Applyjob></Applyjob>
+            element:<Private><Applyjob></Applyjob></Private>
         },
         {
             path:'/addjob',
-            element:<Add></Add>
+            element:<Private><Add></Add></Private>
         },
         {
             path:'/myjob',
-            element:<MyJob></MyJob>
+            element:<Private><MyJob></MyJob></Private>
         },
         {
             path:'/blogs',
-            element:<Blog></Blog>
+            element:<Private><Blog></Blog></Private>
         },
         {
             path:'/profile',
-            element:<Profile></Profile>
+            element:<Private><Profile></Profile></Private>
         },
         {
             path:"/login",

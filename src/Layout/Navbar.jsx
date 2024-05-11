@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../Authfile/Auth';
+import 'react-tooltip/dist/react-tooltip.css'
+import { Tooltip } from 'react-tooltip'
 
 const Navbar = () => {
+  const { user } = useContext(AuthContext)
   const links = <>
     <li><NavLink to={'/'}>Home</NavLink></li>
     <li><NavLink to={'/alljobs'}>All Jobs</NavLink></li>
-    <li><NavLink to={'/appliedjobs'}>Applied Jobs</NavLink></li>
-    <li><NavLink to={'/addjob'}>Add A Job</NavLink></li>
-    <li><NavLink to={'/myjob'}>My Jobs</NavLink></li>
-    <li><NavLink to={'/blogs'}>Blogs</NavLink></li>
-    <li><NavLink to={'/profile'}>User Profile</NavLink></li>
-  </>
+    {user &&
+      <>
+        <li><NavLink to={'/appliedjobs'}>Applied Jobs</NavLink></li>
+        <li><NavLink to={'/addjob'}>Add A Job</NavLink></li>
+        <li><NavLink to={'/myjob'}>My Jobs</NavLink></li>
+        <li><NavLink to={'/profile'}>User Profile</NavLink></li></>
+    }
+
+        <li><NavLink to={'/blogs'}>Blogs</NavLink></li>
+      </>
   return (
     <div>
       <div className="navbar bg-purple-200">
@@ -34,11 +42,22 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <Link to={'/login'}>    <a className="btn btn-outline btn-primary">LogIn</a> </Link>  
-          </div>
+          {user ?
+            <>
+              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar my-anchor-element ">
+                <div className="w-10 rounded-full">
+                  <img alt="" src={user.photoURL} />
+                </div></div>
+              <Tooltip anchorSelect=".my-anchor-element" place="top">
+                {user?.email} </Tooltip></>
+            : <Link to={'/login'}>    <a className="btn btn-outline btn-primary">LogIn</a> </Link>
+          }
+
+
+        </div>
       </div>
     </div>
-  );
+    );
 };
 
-export default Navbar;
+    export default Navbar;
