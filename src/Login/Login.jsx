@@ -38,11 +38,12 @@ const navigate = useNavigate()
 // google
  const handelGoogle = () =>{ 
     signInGoogle()
+
     .then(result=>{
         console.log(result.user)
         toast("logged in successfully")
 
-        navigate(location?.state ? location.state : '/')
+        navigate(location?.state ? location.state :'/')
 
     })
     .catch(error => {

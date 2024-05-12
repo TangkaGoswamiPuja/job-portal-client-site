@@ -27,7 +27,7 @@ const Auth = ({ children }) => {
 
     const signInGoogle = ()=>{
         setLoding(true);
-        signInWithPopup(auth , googleAProvider)
+      return  signInWithPopup(auth , googleAProvider)
     }
 
     const logOut = () => {
