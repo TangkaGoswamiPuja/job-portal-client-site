@@ -28,8 +28,8 @@ job_applicants_number
     <div>
       <h1 className="text-5xl font-bold">{job_title}</h1>
       <p className="py-6">{ job_description}</p>
-      <p>{salary_range}</p>
-      <p>{job_applicants_number}</p>
+      <p> <span className='text-2xl font-bold'>salary :</span> {salary_range}</p>
+      <p>  <span className='text-2xl font-bold'>applicants :</span> {job_applicants_number}</p>
 <button className="btn btn-outline btn-primary" onClick={()=>document.getElementById('my_modal_3').showModal()}>Apply</button>
 <dialog id="my_modal_3" className="modal">
   <div className="modal-box">
