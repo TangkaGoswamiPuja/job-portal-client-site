@@ -110,8 +110,8 @@ const Add = () => {
                                     <div><label htmlFor="job_applicants_number:">Job Applicants Number:</label><br />
         <input className="input input-bordered input-primary w-full max-w-xs" type="number" defaultValue={0} id="applicantsNumber" {...register("applicantsNumber", { required: true })} /></div>
 
-                                    <div><label htmlFor="user_email">User Email:</label><br />
-                                        <input className="input input-bordered input-primary w-full max-w-xs" type="email" id="user_email" defaultValue={user.email}{...register("user_email", { required: true })} /></div>
+                                    <div><label htmlFor="email">User Email:</label><br />
+                                        <input className="input input-bordered input-primary w-full max-w-xs" type="email" id="email" defaultValue={user.email}{...register("email", { required: true })} /></div>
 
                                     <div><label htmlFor="user_name">User Name:</label><br />
                                         <input className="input input-bordered input-primary w-full max-w-xs" type="text" id="user_name" defaultValue={user.displayName} {...register("user_name", { required: true })} /></div>

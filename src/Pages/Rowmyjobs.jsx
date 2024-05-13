@@ -1,0 +1,22 @@
+import React from 'react';
+
+const Rowmyjobs = ({row}) => {
+    const{jobTitle,jobCategory,email,user_name}=row
+    return (
+        
+             <tr>
+        <th><button className="btn btn-square btn-xs">
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+</button></th>
+        <td>{jobTitle}</td>
+        <td>{jobCategory}</td>
+        <td>{user_name}</td>
+        <td>{email}</td>
+        
+        <td><button  className="btn btn-outline bg-purple-500 btn-xs">update</button></td>
+      </tr>
+        
+    );
+};
+
+export default Rowmyjobs;
