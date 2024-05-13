@@ -11,6 +11,7 @@ import Add from "../Pages/Add";
 import Login from "../Login/Login";
 import Register from "../Login/Register";
 import Private from "../Authfile/Private";
+import Details from "../Pages/Details";
 
 
 
@@ -29,6 +30,12 @@ import Private from "../Authfile/Private";
             element:<Alljob></Alljob>
         },
         {
+            path : '/details/:id',
+            element:<Private><Details></Details></Private>,
+            loader: ()=>fetch('http://localhost:5000/allJobs')
+
+        },
+        {
             path:'/appliedjobs',
             element:<Private><Applyjob></Applyjob></Private>
         },
@@ -36,6 +43,7 @@ import Private from "../Authfile/Private";
             path:'/addjob',
             element:<Private><Add></Add></Private>
         },
+        
         {
             path:'/myjob',
             element:<Private><MyJob></MyJob></Private>

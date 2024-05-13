@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Alljob = () => {
     const [jobs, setJobs] = useState([]);
@@ -52,7 +53,7 @@ const Alljob = () => {
                                         salary_range
                                     }</td>
                                     <th>
-                                        <button className="btn btn-outline bg-purple-500 btn-xs">Details</button>
+                                     <Link to={`/details/${job._id}`}>  <button  className="btn btn-outline bg-purple-500 btn-xs">Details</button></Link>
                                     </th>
                                 </tr>
                             )}
