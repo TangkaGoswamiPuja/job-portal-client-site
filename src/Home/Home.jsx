@@ -1,8 +1,8 @@
 import React from 'react';
 import Banner from './Banner';
-import Tab from './Tab';
 import Popular from './Popular';
 import Overview from './Overview';
+import Jobtabs from './Jobtabs';
 
 const Home = () => {
     return (
@@ -11,7 +11,7 @@ const Home = () => {
            <Banner></Banner>
            </div>
            <div className='border-2  border-neutral-950 mt-10 mb-10 '>
-           <Tab></Tab>
+<Jobtabs></Jobtabs>
            </div>
            <div className='border-2  border-neutral-950 mt-10 mb-10 '>
            <Popular></Popular>
