@@ -12,60 +12,68 @@ import Login from "../Login/Login";
 import Register from "../Login/Register";
 import Private from "../Authfile/Private";
 import Details from "../Pages/Details";
+ import Update from "../Pages/Update";
 
 
 
- const router = createBrowserRouter([
+const router = createBrowserRouter([
     {
-      path: "/",
-      errorElement:<Error></Error> ,
-      element: <Root></Root>,
-      children:[
-        {
-            path:'/',
-            element: <Home></Home>
-        },
-        {
-            path:'/alljobs',
-            element:<Alljob></Alljob>
-        },
-        {
-            path : '/details/:id',
-            element:<Private><Details></Details></Private>,
-            loader: ()=>fetch('http://localhost:5000/allJobs')
+        path: "/",
+        errorElement: <Error></Error>,
+        element: <Root></Root>,
+        children: [
+            {
+                path: '/',
+                element: <Home></Home>
+            },
+            {
+                path: '/alljobs',
+                element: <Alljob></Alljob>
+            },
+            {
+                path: '/details/:id',
+                element: <Private><Details></Details></Private>,
+                loader: () => fetch('http://localhost:5000/allJobs')
 
-        },
-        {
-            path:'/appliedjobs',
-            element:<Private><Applyjob></Applyjob></Private>
-        },
-        {
-            path:'/addjob',
-            element:<Private><Add></Add></Private>
-        },
-        
-        {
-            path:'/myjob',
-            element:<Private><MyJob></MyJob></Private>
-        },
-        {
-            path:'/blogs',
-            element:<Private><Blog></Blog></Private>
-        },
-        {
-            path:'/profile',
-            element:<Private><Profile></Profile></Private>
-        },
-        {
-            path:"/login",
-            element: <Login></Login>
-        },
-        {path: "/register",
-        element:<Register></Register>
+            },
+            {
+                path: '/appliedjobs',
+                element: <Private><Applyjob></Applyjob></Private>
+            },
+            {
+                path: '/addjob',
+                element: <Private><Add></Add></Private>
+            },
 
-        }
+            {
+                path: '/myjob',
+                element: <Private><MyJob></MyJob></Private>
+            },
         
-      ]
+             {
+                path: '/updatejobs/:id',
+               element : <Private><Update></Update></Private>,
+              loader: ({params})=>fetch(`http://localhost:5000/allJobs/${params.id}`)
+             },
+            {
+                path: '/blogs',
+                element: <Private><Blog></Blog></Private>
+            },
+            {
+                path: '/profile',
+                element: <Private><Profile></Profile></Private>
+            },
+            {
+                path: "/login",
+                element: <Login></Login>
+            },
+            {
+                path: "/register",
+                element: <Register></Register>
+
+            }
+
+        ]
     },
-  ]);
-  export default router
+]);
+export default router

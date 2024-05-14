@@ -8,7 +8,6 @@ import { AuthContext } from '../Authfile/Auth';
 const Add = () => {
 
     const {user} = useContext(AuthContext)
-    // const [startDate, setStartDate] = useState(new Date());
     const [postingDate, setPostingDate] = useState(new Date());
    
     const [deadline, setDeadline] = useState(new Date());
@@ -38,23 +37,16 @@ const Add = () => {
             if (data.insertedId) {
                 Swal.fire({
                     title: 'Success!',
-                    text: 'You Added A Place',
+                    text: 'You Added A job',
                     icon: 'success',
                     confirmButtonText: 'Done'
                 })
-                // reset();
+                 reset();
             }
         })
       
     };
-    // const handlePostingDateChange = (date) => {
-    //     setPostingDate(date);
-    //     setValue('postingDate', date); 
-    //   };
-    //   const handleDeadlineChange = (date) => {
-    //     setDeadline(date);
-    //     setValue('deadline', date); 
-    //   };
+    
     return (
 
 <div>
