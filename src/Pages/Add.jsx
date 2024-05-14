@@ -6,24 +6,31 @@ import Swal from 'sweetalert2'
 import { AuthContext } from '../Authfile/Auth';
 
 const Add = () => {
+
     const {user} = useContext(AuthContext)
     // const [startDate, setStartDate] = useState(new Date());
     const [postingDate, setPostingDate] = useState(new Date());
-    // console.log(postingDate, "posting date value")
+   
     const [deadline, setDeadline] = useState(new Date());
     const { register, handleSubmit, formState: { errors } ,reset} = useForm();
    
     const onSubmit = (data) => {
       console.log(data); 
       console.log(errors);
-     
-     
+      const updateData = {
+        ...data,
+        postingDate,
+        deadline
+      }
+     console.log(updateData)
+      console.log(postingDate, "posting date value")
+      console.log(deadline, "dead date value")
       fetch("http://localhost:5000/allJobs", {
         method: "POST",
         headers: {
             "content-type": "application/json"
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(updateData)
     })
         .then(res => res.json())
         .then(data => {
@@ -35,7 +42,7 @@ const Add = () => {
                     icon: 'success',
                     confirmButtonText: 'Done'
                 })
-                reset();
+                // reset();
             }
         })
       
@@ -92,18 +99,16 @@ const Add = () => {
             <div><label htmlFor="postingDate">Job Posting Date:</label><br />
             <DatePicker
                   selected={postingDate} 
-                  onChange={(date) => {
-                     setPostingDate(date); 
-
-                     setValue('postingDate', date); 
-                  }}
+                  onChange={date => setPostingDate(date)}
                   className="input input-bordered input-primary w-full max-w-xs"
                   id="postingDate"
-                  {...register('postingDate')} 
+                //   {...register('postingDate')} 
                /></div>
 
 <div><label htmlFor="deadline">Application Deadline:</label><br />
-  <DatePicker  selected={deadline} onChange={date => setDeadline(date)} className="input input-bordered input-primary w-full max-w-xs" id="deadLine"{...register('deadLine')} />
+  <DatePicker  selected={deadline} onChange={date => setDeadline(date)} className="input input-bordered input-primary w-full max-w-xs" id="deadLine"
+//   {...register('deadLine')} 
+  />
           
              </div>
 
