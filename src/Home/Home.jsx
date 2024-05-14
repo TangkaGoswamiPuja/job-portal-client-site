@@ -13,10 +13,10 @@ const Home = () => {
            <div className='mt-10 mb-10 '>
 <Jobtabs></Jobtabs>
            </div>
-           <div className='border-2  border-neutral-950 mt-10 mb-10 '>
+           <div className='mt-10 mb-10 '>
            <Popular></Popular>
            </div>
-           <div className='border-2  border-neutral-950'>
+           <div >
            <Overview></Overview>
            </div>
           
