@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+
+
 const Jobtabs = () => {
+
     const [jobs, setJobs] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/allJobs')
@@ -14,6 +17,7 @@ const Jobtabs = () => {
       };
     return (
         <div>
+          
 <Tabs>
   <TabList>
   <Tab onClick={() => handleTabClick(0)}>All Jobs</Tab>
@@ -22,24 +26,6 @@ const Jobtabs = () => {
         <Tab onClick={() => handleTabClick(3)}>Hybrid Jobs</Tab>
         <Tab onClick={() => handleTabClick(4)}>Part-Time Jobs</Tab>
   </TabList>
-  {/* Name who posted the job,
-- Job Title
-- Job Posting Date
-- Application Deadline
-- Salary range
-- Job Applicants Number
-
-
-job_category
-"Remote"
-
-job_category
-"On Site"
-job_category
-"Hybrid"
-job_category
-"Part-Time"
-*/}
   <TabPanel  >
     <div className='mx-auto grid grid-cols-2 gap-3 lg:grid-cols-3 '>
  {jobs.map(job=>
