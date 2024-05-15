@@ -17,7 +17,7 @@ const Profile = () => {
   <figure className="px-10 pt-10">
     <img src={user.
 photoURL
-} alt="Shoes" className="rounded-xl" />
+} alt="profile picture" className="rounded-xl" />
   </figure>
   <div className="card-body items-center text-center">
     <h2 className="card-title">{user.
