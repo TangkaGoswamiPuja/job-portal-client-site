@@ -14,17 +14,17 @@ const Add = () => {
     const { register, handleSubmit, formState: { errors } ,reset} = useForm();
    
     const onSubmit = (data) => {
-      console.log(data); 
-      console.log(errors);
+    //   console.log(data); 
+    //   console.log(errors);
       const updateData = {
         ...data,
         postingDate,
         deadline
       }
-     console.log(updateData)
-      console.log(postingDate, "posting date value")
-      console.log(deadline, "dead date value")
-      fetch("http://localhost:5000/allJobs", {
+    //  console.log(updateData)
+    //   console.log(postingDate, "posting date value")
+    //   console.log(deadline, "dead date value")
+      fetch("https://job-portal-server-site-kappa.vercel.app/alljobs", {
         method: "POST",
         headers: {
             "content-type": "application/json"
@@ -33,7 +33,7 @@ const Add = () => {
     })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            // console.log(data);
             if (data.insertedId) {
                 Swal.fire({
                     title: 'Success!',

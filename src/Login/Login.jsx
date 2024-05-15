@@ -10,19 +10,19 @@ const Login = () => {
     const [logErr , setLogErr] = useState('')
 const {signIn,signInGoogle} = useContext(AuthContext)
 const location = useLocation();
-    console.log('show', location)
+    // console.log('show', location)
 const navigate = useNavigate()
 
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onLogin = data => {
-        console.log(data);
-        console.log(errors);
+        // console.log(data);
+        // console.log(errors);
         setLogErr('')
 
         signIn(data.email,data.password)
         .then(result=>{
-            console.log(result.user)
+            // console.log(result.user)
             toast("logged in successfully")
 
             navigate(location?.state ? location.state :'/')
@@ -40,7 +40,7 @@ const navigate = useNavigate()
     signInGoogle()
 
     .then(result=>{
-        console.log(result.user)
+        // console.log(result.user)
         toast("logged in successfully")
 
         navigate(location?.state ? location.state :'/')
@@ -85,7 +85,7 @@ const navigate = useNavigate()
 
       <div  className='flex items-center justify-center p-3 gap-2'>
         <p>or login with </p>
-      <img onClick={handelGoogle} className='w-10' src="./../../public/google.png" alt="" />
+      <img onClick={handelGoogle} className='w-10' src="/google.png" alt="" />
     
       </div>
       

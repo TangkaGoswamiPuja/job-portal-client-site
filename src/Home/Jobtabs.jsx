@@ -8,7 +8,7 @@ const Jobtabs = () => {
 
     const [jobs, setJobs] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/allJobs')
+        fetch('https://job-portal-server-site-kappa.vercel.app/alljobs')
             .then(res => res.json())
             .then(data => setJobs(data))
     }, [])

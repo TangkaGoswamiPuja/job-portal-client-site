@@ -13,13 +13,13 @@ const Register = () => {
     const { createrUser} = useContext(AuthContext)
       const {register,handleSubmit, formState:{errors},reset}= useForm();
         const onSubmit = data =>{  
-            console.log(data);
-            console.log(errors);
+            // console.log(data);
+            // console.log(errors);
             setRegError('')
 
             createrUser(data.email,data.password)
             .then(result=> {
-                console.log(result.user)
+                // console.log(result.user)
            toast("Registration successful !")
         })
         .catch(error=>{console.error(error)

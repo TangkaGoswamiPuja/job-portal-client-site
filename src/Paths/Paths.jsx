@@ -33,7 +33,7 @@ const router = createBrowserRouter([
             {
                 path: '/details/:id',
                 element: <Private><Details></Details></Private>,
-                loader: () => fetch('http://localhost:5000/allJobs')
+                loader: ({params}) => fetch(`https://job-portal-server-site-kappa.vercel.app/alljobs/${params.id}`)
 
             },
             {
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
              {
                 path: '/updatejobs/:id',
                element : <Private><Update></Update></Private>,
-              loader: ({params})=>fetch(`http://localhost:5000/allJobs/${params.id}`)
+              loader: ({params})=>fetch(`https://job-portal-server-site-kappa.vercel.app/alljobs/${params.id}`)
              },
             {
                 path: '/blogs',

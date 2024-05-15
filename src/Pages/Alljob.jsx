@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 const Alljob = () => {
     const [jobs, setJobs] = useState([]);
     const [search, setSearch] = useState('')
-    console.log(search);
+    // console.log(search);
 
     useEffect(() => {
-        fetch('http://localhost:5000/allJobs')
+        fetch('https://job-portal-server-site-kappa.vercel.app/alljobs')
             .then(res => res.json())
             .then(data => setJobs(data))
     }, [])

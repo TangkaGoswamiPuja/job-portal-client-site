@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 const Rowmyjobs = ({row , handelDelete}) => {
-    console.log(row)
+    // console.log(row)
     const{_id,jobTitle,jobCategory,email,user_name}=row;
 
    

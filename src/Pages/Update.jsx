@@ -25,17 +25,17 @@ const Update = () => {
     const { register, handleSubmit, formState: { errors } ,reset} = useForm();
    
     const onSubmit = (data) => {
-      console.log(data); 
-      console.log(errors);
+    //   console.log(data); 
+    //   console.log(errors);
       const updateData = {
         ...data,
         postingDate,
         deadline
       }
-      console.log(updateData)
-      console.log(postingDate, "posting date value")
-      console.log(deadline, "dead date value")
-      fetch(`http://localhost:5000/allJobs/${_id}`, {
+    //   console.log(updateData)
+    //   console.log(postingDate, "posting date value")
+    //   console.log(deadline, "dead date value")
+      fetch(`https://job-portal-server-site-kappa.vercel.app/alljobs/${_id}`, {
         method: "PUT",
         headers: {
             "content-type": "application/json"
@@ -44,7 +44,7 @@ const Update = () => {
     })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            // console.log(data);
             if (data.modifiedCount>0) {
                 Swal.fire({
                     title: 'Success!',

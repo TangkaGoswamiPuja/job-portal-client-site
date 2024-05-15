@@ -7,7 +7,7 @@ const MyJob = () => {
 
     const {user} = useContext(AuthContext)
     const [selectJodb , setMyJob]=useState([]);
-    const url =`http://localhost:5000/allJobs?email=${user?.email}`
+    const url =`https://job-portal-server-site-kappa.vercel.app/alljobs?email=${user?.email}`
     useEffect(()=>{
         fetch(url)
         .then(res => res.json())
@@ -16,7 +16,7 @@ const MyJob = () => {
     },[])
 
     const handelDelete = _id =>{
-      console.log(_id)
+      // console.log(_id)
       Swal.fire({
           title: 'Are you sure?',
           text: "You won't be able to revert this!",
@@ -30,12 +30,12 @@ const MyJob = () => {
           if (result.isConfirmed) {
 
 
-              fetch(`http://localhost:5000/allJobs/${_id}`, {
+              fetch(`https://job-portal-server-site-kappa.vercel.app/alljobs/${_id}`, {
                   method: 'DELETE'
               })
               .then(res => res.json())
               .then(data => {
-                  console.log(data);
+                  // console.log(data);
                   if (data.deletedCount > 0) {
                       Swal.fire(
                           'Deleted!',
