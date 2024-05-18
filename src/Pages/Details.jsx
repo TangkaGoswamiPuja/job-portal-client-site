@@ -1,24 +1,46 @@
 import React, { useContext } from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
 import { AuthContext } from '../Authfile/Auth';
+import { useForm } from 'react-hook-form';
 
 const Details = () => {
-  const { user } = useContext(AuthContext)
+const { user } = useContext(AuthContext)
   const details = useLoaderData()
   const { id } = useParams()
-
-
-
-  const {
+const {
     picture_url, job_title,
     job_description,
     salary_range,
-
     job_applicants_number
-
-
-
   } = details || {}
+  const { register, handleSubmit, formState: { errors },reset } = useForm();
+  const onSubmit = data => {
+   console.log(data);
+  console.log(errors);
+  const apply = {
+    ...data
+    
+  }
+
+  fetch("https://job-portal-server-site-kappa.vercel.app/apply", {
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify(apply)
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+
+            if (data.insertedId) {
+           alert("you applied the job")
+                
+               reset();
+            }
+        })
+      }
+
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
@@ -38,27 +60,27 @@ const Details = () => {
                 </form>
                 <h3 className="font-bold text-xl ">Apply here</h3>
 
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <label className="block">
                     <span className="text-gray-700">Name:</span><br></br>
 
                     <input type="text" placeholder="Your Name" className="input input-bordered input-primary w-full max-w-xs" default value={user.
                       displayName
-                    } />
+                    } {...register("name")} />
                   </label>
                   <label className="block mt-4">
                     <span className="text-gray-700">Email:</span><br></br>
 
                     <input type="text" placeholder="email" className="input input-bordered input-primary w-full max-w-xs" default value={user.email
-                    } />
+                    }  {...register("email")} />
                   </label>
                   <label className="block mt-4">
                     <span className="text-gray-700">Resume Link:</span><br></br>
 
 
-                    <input type="text" placeholder="Resume Link" className="input input-bordered input-primary w-full max-w-xs" />
+                    <input type="text" placeholder="Resume Link" className="input input-bordered input-primary w-full max-w-xs" {...register("resumeLink")} />
                   </label>
-                  <button type="submit" className="btn btn-primary mt-4">Submit Application</button>
+                  <button type="submit" className="btn btn-primary mt-4" >Submit Application</button>
                 </form>
               </div>
             </dialog>

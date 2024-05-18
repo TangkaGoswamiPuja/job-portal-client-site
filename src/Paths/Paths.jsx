@@ -38,7 +38,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/appliedjobs',
-                element: <Private><Applyjob></Applyjob></Private>
+                element: <Private><Applyjob></Applyjob></Private>,
+                loader: ()=>fetch ('https://job-portal-server-site-kappa.vercel.app/apply')
             },
             {
                 path: '/addjob',

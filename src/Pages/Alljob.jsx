@@ -9,8 +9,19 @@ const Alljob = () => {
     useEffect(() => {
         fetch('https://job-portal-server-site-kappa.vercel.app/alljobs')
             .then(res => res.json())
-            .then(data => setJobs(data))
-    }, [])
+            .then(data => {
+                console.log(data)
+
+                const filterData = data.filter((job) => {
+                    console.log(search)
+                    return search === '' ? job : job?.job_title?.includes(search)
+                })
+
+                console.log(filterData);
+             setJobs(filterData)   
+            })
+
+    }, [search])
     return (
         <div className='mt-10' >
 
@@ -37,9 +48,7 @@ const Alljob = () => {
                         <tbody>
 
                             {/* row  */}
-                            {jobs.filter((job) => {
-                                return search.toLowerCase() === '' ? job : job.job_title.toLowerCase().includes(search)
-                            }).map(job =>
+                            {jobs?.map(job =>
                                 <tr className="hover" key={job._id}>
 
                                     <td>{job.
@@ -53,7 +62,7 @@ const Alljob = () => {
                                         salary_range
                                     }</td>
                                     <th>
-                                     <Link to={`/details/${job._id}`}>  <button  className="btn btn-outline bg-purple-500 btn-xs">Details</button></Link>
+                                        <Link to={`/details/${job._id}`}>  <button className="btn btn-outline bg-purple-500 btn-xs">Details</button></Link>
                                     </th>
                                 </tr>
                             )}
