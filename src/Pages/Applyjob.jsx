@@ -20,9 +20,11 @@ const Applyjob = () => {
     <thead>
     <tr>
         <th></th>
+        
         <th>User name</th>
         <th>email</th>
         <th>Resume link</th>
+        <th>Job category</th>
         <th></th>
       </tr>
     </thead>
@@ -32,9 +34,11 @@ const Applyjob = () => {
       <tr className="bg-base-200">
 
         <th></th>
+       
         <td>{here.name}</td>
         <td>{here.email}</td>
         <td>{here.resumeLink}</td>
+        <td>{here.category}</td>
         <th></th>
       </tr>)}
      
