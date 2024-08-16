@@ -84,7 +84,3 @@ export default Applyjob;
 
 
 
-// q:can you explain the code?
-// a: This is the Applyjob component. It is a functional component that uses the useContext and useState hooks from React. It imports the AuthContext from the Authfile/Auth file. The component fetches data from the server using the useEffect hook and stores it in the applyHere state using the useState hook. It then renders a table with the fetched data, displaying the user's name, email, resume link, and job category. The table is populated with data from the applyHere state using the map function. The component returns the table as the output.
-// q:what is useEffect and useState?
-// a: The useEffect hook is used to perform side effects in functional components. It allows you to perform data fetching, subscriptions, or manually changing the DOM in a functional component. The useEffect hook takes a function as its first argument, which will be executed after the component has rendered. It can also take a second argument, an array of dependencies, to control when the effect runs.
