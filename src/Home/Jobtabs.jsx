@@ -47,7 +47,8 @@ const Jobtabs = () => {
 </div>
   </TabPanel>
   <TabPanel>
-  <div className=' mx-auto grid grid-cols-2 gap-3 lg:grid-cols-3 '>    {jobs.filter((job)=>job.job_category === "On Site").map((job,index)=>(
+  <div className=' mx-auto grid grid-cols-2 gap-3 lg:grid-cols-3 '>   
+     {jobs.filter((job)=>job.job_category === "On Site").map((job,index)=>(
         <div key={index}>
      <div className="card w-96 bg-base-100 shadow-3xl border-4 border-purple-600">
   <div className="card-body">
