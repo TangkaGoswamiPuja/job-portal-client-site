@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../Authfile/Auth';
 import Select from 'react-select';
+import generatePDF, { Resolution, Margin } from "react-to-pdf";
 
 const options = [
   { value: 'On Site', label: 'On-Site Jobs' },
@@ -8,6 +9,65 @@ const options = [
   { value: 'Hybrid', label: 'Hybrid Jobs' },
   { value: 'Part-Time', label: 'Part-Time Jobs' },
 ];
+
+// const pdfOptions = {
+
+//   method: 'open',
+ 
+//   resolution: Resolution.HIGH,
+//   page: {
+//      margin: Margin.SMALL,
+    
+//      format: 'letter',
+    
+//      orientation: 'landscape',
+//   },
+//   canvas: {
+     
+//      mimeType: 'image/png',
+//      qualityRatio: 1
+//   },
+  
+//   overrides: {
+     
+//      pdf: {
+//         compress: true
+//      },
+    
+//      canvas: {
+//         useCORS: true
+//      }
+//   },
+// };
+
+const  pdfOptions = {
+  filename: "advanced-example.pdf",
+  method: "save",
+ resolution: Resolution.EXTREME,
+  page: {
+    margin: Margin.SMALL,
+    format: "letter",
+    orientation: "landscape"
+  },
+  canvas: {
+    mimeType: "image/jpeg",
+    qualityRatio: 1
+  },
+  overrides: {
+    pdf: {
+      compress: true
+    },
+    canvas: {
+      useCORS: true
+    }
+  }
+};
+
+const getTargetElement = () => document.getElementById("container");
+
+const downloadPdf = () => generatePDF(getTargetElement, pdfOptions);
+
+
 const Applyjob = () => {
   const { user } = useContext(AuthContext);
   const [applyHere, setMyJob] = useState([]);
@@ -16,6 +76,10 @@ const Applyjob = () => {
 
 
   const url = `https://job-portal-server-site-kappa.vercel.app/apply?email=${user?.email}`
+ 
+
+
+ 
   useEffect(() => {
     fetch(url)
       .then(res => res.json())
@@ -25,6 +89,7 @@ const Applyjob = () => {
 
       });
   }, [url]);
+
   useEffect(() => {
     if (selectedOption) {
       const filtered = applyHere.filter(job => job.category === selectedOption.value);
@@ -42,7 +107,11 @@ const Applyjob = () => {
         options={options}
         placeholder="select job category"
       />
-      <div className="overflow-x-auto">
+        <button onClick={downloadPdf}className="btn btn-primary mt-4">
+                Download as PDF
+            </button>
+
+      <div className="overflow-x-auto"  id="container">
         <table className="table">
           {/* head */}
           <thead>
