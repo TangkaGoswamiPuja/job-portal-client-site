@@ -1,7 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../Authfile/Auth';
 import Select from 'react-select';
-import generatePDF, { Resolution, Margin } from "react-to-pdf";
+import html2canvas from 'html2canvas-pro';
+import jsPDF from 'jspdf';
+
 
 const options = [
   { value: 'On Site', label: 'On-Site Jobs' },
@@ -9,75 +11,17 @@ const options = [
   { value: 'Hybrid', label: 'Hybrid Jobs' },
   { value: 'Part-Time', label: 'Part-Time Jobs' },
 ];
-
-// const pdfOptions = {
-
-//   method: 'open',
- 
-//   resolution: Resolution.HIGH,
-//   page: {
-//      margin: Margin.SMALL,
-    
-//      format: 'letter',
-    
-//      orientation: 'landscape',
-//   },
-//   canvas: {
-     
-//      mimeType: 'image/png',
-//      qualityRatio: 1
-//   },
-  
-//   overrides: {
-     
-//      pdf: {
-//         compress: true
-//      },
-    
-//      canvas: {
-//         useCORS: true
-//      }
-//   },
-// };
-
-const  pdfOptions = {
-  filename: "advanced-example.pdf",
-  method: "save",
- resolution: Resolution.EXTREME,
-  page: {
-    margin: Margin.SMALL,
-    format: "letter",
-    orientation: "landscape"
-  },
-  canvas: {
-    mimeType: "image/jpeg",
-    qualityRatio: 1
-  },
-  overrides: {
-    pdf: {
-      compress: true
-    },
-    canvas: {
-      useCORS: true
-    }
-  }
-};
-
-const getTargetElement = () => document.getElementById("container");
-
-const downloadPdf = () => generatePDF(getTargetElement, pdfOptions);
-
-
 const Applyjob = () => {
   const { user } = useContext(AuthContext);
   const [applyHere, setMyJob] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
+  const tableRef = useRef(null);
 
 
   const url = `https://job-portal-server-site-kappa.vercel.app/apply?email=${user?.email}`
  
-
+  
 
  
   useEffect(() => {
@@ -99,6 +43,23 @@ const Applyjob = () => {
     }
   }, [selectedOption, applyHere]);
 
+
+ 
+const downloadPDF = () => {
+  const input = tableRef.current;
+  html2canvas (input).then((canvas) => {
+  const imgData = canvas.toDataURL('image/png');
+  const pdf = new jsPDF('p', 'mm', 'a4', true); const pdfWidth = pdf.internal.pageSize.getWidth();
+  const pdfHeight = pdf.internal.pageSize.getHeight();
+  const imgWidth = canvas.width;
+  const imgHeight = canvas.height;
+const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+    const imgX = (pdfWidth - imgWidth * ratio) / 2;
+    const imgY = 30;
+    pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth, ratio, imgHeight * ratio); pdf.save('invoice.pdf');
+  });
+};
+
   return (
     <div>
       <Select
@@ -107,12 +68,11 @@ const Applyjob = () => {
         options={options}
         placeholder="select job category"
       />
-        <button onClick={downloadPdf}className="btn btn-primary mt-4">
-                Download as PDF
-            </button>
+        
+       
 
-      <div className="overflow-x-auto"  id="container">
-        <table className="table">
+      <div className="overflow-x-auto"  >
+        <table className="table"  ref={tableRef}>
           {/* head */}
           <thead>
             <tr>
@@ -145,6 +105,9 @@ const Applyjob = () => {
 
         </table>
       </div>
+      <button onClick={downloadPDF} className="btn btn-primary my-4">
+        Download Table as PDF
+      </button>
     </div>
   );
 };
