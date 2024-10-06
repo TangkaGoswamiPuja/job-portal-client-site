@@ -1,12 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
 import { AuthContext } from '../Authfile/Auth';
 import { useForm } from 'react-hook-form';
+import Payment from './Payment/Payment';
 
 const Details = () => {
 const { user } = useContext(AuthContext)
   const details = useLoaderData()
   const { id } = useParams()
+const [paymentDone , setPaymentDone] = useState(false);
+
 const {
     picture_url, job_title,
     job_description,
@@ -42,6 +45,11 @@ const {
         })
       }
 
+      const handlePaymentSuccess = () => {
+        setPaymentDone(true);
+      };
+
+
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
@@ -54,7 +62,13 @@ const {
             <p>  <span className='text-2xl font-bold'>applicants :</span> {job_applicants_number}</p>
             <p>  <span className='text-2xl font-bold'>category :</span> {job_category}</p>
 
-            <button className="btn btn-outline btn-primary" onClick={() => document.getElementById('my_modal_3').showModal()}>Apply</button>
+           <div className='mb-3 mt-3'> <Payment onPaymentSuccess={handlePaymentSuccess}></Payment>
+           </div>
+
+            <button className={`btn btn-outline btn-primary ${!paymentDone ? 'btn-disabled' : ''}`} onClick={() => document.getElementById('my_modal_3').showModal()}    disabled={!paymentDone} >  Apply </button>
+
+            {!paymentDone && <p className="text-red-500 mt-2">Complete the payment to enable the Apply button.</p>}
+
             <dialog id="my_modal_3" className="modal">
               <div className="modal-box">
                 <form method="dialog">
@@ -90,7 +104,10 @@ const {
                     <span className="text-gray-700">Resume Link:</span><br></br>
  <input type="text" placeholder="Resume Link" className="input input-bordered input-primary w-full max-w-xs" {...register("resumeLink")} />
                   </label>
-                  <button type="submit" className="btn btn-primary mt-4" >Submit Application</button>
+
+                 
+
+ <button type="submit" className="btn btn-primary mt-4" > p Submit Application</button>
                 </form>
               </div>
             </dialog>
