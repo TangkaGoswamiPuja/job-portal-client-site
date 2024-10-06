@@ -3,12 +3,15 @@ import { useLoaderData, useParams } from 'react-router-dom';
 import { AuthContext } from '../Authfile/Auth';
 import { useForm } from 'react-hook-form';
 import Payment from './Payment/Payment';
+import { PaymentContext } from '../Authfile/PaymentContext';
 
 const Details = () => {
 const { user } = useContext(AuthContext)
+const { paymentDone } = useContext(PaymentContext); // Use paymentDone from context
+
   const details = useLoaderData()
   const { id } = useParams()
-const [paymentDone , setPaymentDone] = useState(false);
+// const [paymentDone , setPaymentDone] = useState(false);
 
 const {
     picture_url, job_title,
@@ -45,9 +48,9 @@ const {
         })
       }
 
-      const handlePaymentSuccess = () => {
-        setPaymentDone(true);
-      };
+      // const handlePaymentSuccess = () => {
+      //   setPaymentDone(true);
+      // };
 
 
   return (
@@ -62,7 +65,7 @@ const {
             <p>  <span className='text-2xl font-bold'>applicants :</span> {job_applicants_number}</p>
             <p>  <span className='text-2xl font-bold'>category :</span> {job_category}</p>
 
-           <div className='mb-3 mt-3'> <Payment onPaymentSuccess={handlePaymentSuccess}></Payment>
+           <div className='mb-3 mt-3'> <Payment></Payment>
            </div>
 
             <button className={`btn btn-outline btn-primary ${!paymentDone ? 'btn-disabled' : ''}`} onClick={() => document.getElementById('my_modal_3').showModal()}    disabled={!paymentDone} >  Apply </button>
@@ -107,7 +110,7 @@ const {
 
                  
 
- <button type="submit" className="btn btn-primary mt-4" > p Submit Application</button>
+ <button type="submit" className="btn btn-primary mt-4" >  Submit Application</button>
                 </form>
               </div>
             </dialog>

@@ -1,9 +1,13 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import Swal from "sweetalert2";
+import { PaymentContext } from "../../Authfile/PaymentContext";
+import { useContext } from "react";
 
 const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
+    const { completePayment } = useContext(PaymentContext); // Get the completePayment function
+
    
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -29,7 +33,8 @@ const CheckoutForm = () => {
                 showConfirmButton: false,
                 timer: 1500
               });
-            console.log('payment', paymentMethod)
+            console.log('payment', paymentMethod);
+            completePayment();
         }
     }
 
